@@ -3,12 +3,12 @@ import 'dart:convert';
 
 class UserService {
 
-  Future<bool> createAttendee(String userName, String name, String email) async {
+  Future<bool> createUser(String userName, String name, String email) async {
 
     //https://the-big-fun-402823.rj.r.appspot.com/api/v1/attendees
     final url = Uri.parse('https://the-big-fun-402823.rj.r.appspot.com/api/v1/attendees');
 
-    final Map<String, dynamic> attendeeData = {
+    final Map<String, dynamic> userData = {
       'userName': userName,
       'name': name,
       'email': email,
@@ -20,14 +20,14 @@ class UserService {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(attendeeData),
+      body: jsonEncode(userData),
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('Attendee created successfully');
+      print('User created successfully');
       return true;
     } else {
-      print('Error creating the attendee. Status code: ${response.statusCode}');
+      print('Error creating the user. Status code: ${response.statusCode}');
       return false;
     }
   }
