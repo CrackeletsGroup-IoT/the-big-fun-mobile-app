@@ -59,7 +59,7 @@ class _ViewAllEventsState extends State<ViewAllEvents> {
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: AppBar(
-        title: const Text('Event List'),
+        title: const Text('Event List '),
         backgroundColor: colorBackground, // Cambia el color del AppBar aquí
         centerTitle: true, // Centra el texto en el AppBar
       ),
