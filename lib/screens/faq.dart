@@ -27,54 +27,58 @@ class _FaqState extends State<Faq> {
     FAQItem(
       question: "¿Cómo puedo encontrar eventos en mi ciudad?",
       answer: "Puedes buscar eventos por ubicación en nuestra aplicación. Solo ingresa al apartado del mapa y podrás visualizar los eventos cercanos a tu ubicación",
-    ),];
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    Color color_background = Color.fromARGB(255, 99, 99, 163);
     return Scaffold(
       appBar: AppBar(
-
         title: Text("FAQs"),
-        backgroundColor: Color.fromARGB(255, 83, 17, 92),
+        backgroundColor: Color.fromARGB(255, 99, 99, 163),
         centerTitle: true,
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: faqList.map((item) {
-              return SizedBox(
-                width: 300, // Establece el ancho deseado para todos los contenedores.
-                child: Container(
-                  margin: EdgeInsets.all(8.0), // Margen alrededor del contenedor.
-                  padding: EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2, // Ancho del borde.
-                      color: Color.fromARGB(255, 83, 17, 92), // Color del borde (en este caso, azul).
+      body: Container(
+        color: color_background,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: faqList.map((item) {
+                return SizedBox(
+                  width: 300,
+                  child: Container(
+                    margin: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Fondo blanco del Container
+                      border: Border.all(
+                        width: 2,
+                        color: Color.fromARGB(255, 250, 250, 250),
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
                     ),
-                    borderRadius: BorderRadius.circular(12.0), // Radio del borde.
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.question,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.question,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8, width: 50,),
-                      Text(
-                        item.answer,
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      // Una línea divisoria entre cada pregunta y respuesta.
-                    ],
+                        SizedBox(height: 8, width: 50,),
+                        Text(
+                          item.answer,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
+            ),
           ),
         ),
       ),
