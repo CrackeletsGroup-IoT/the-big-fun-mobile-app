@@ -1,3 +1,4 @@
+import 'package:big_fun_app/screens/faq.dart';
 import 'package:big_fun_app/screens/home.dart';
 import 'package:big_fun_app/screens/view_all_events.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget>_children=[
     Home(),
     const ViewAllEvents(),
-    // const UserReels(),
+    //const FAQItem(question: question, answer: answer),
     // const UserShop(),
     // const UserAccount(),
   ];
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           items: [
             const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             const BottomNavigationBarItem(icon: Icon(Icons.stadium), label: 'My Events'),
-            const BottomNavigationBarItem(icon: Icon(Icons.people), label: 'About Us'),
+            const BottomNavigationBarItem(icon: Icon(Icons.people), label: 'FAQ'),
           ],
         ),
       ),
