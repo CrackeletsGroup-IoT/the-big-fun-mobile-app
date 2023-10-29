@@ -1,5 +1,6 @@
 import 'package:big_fun_app/screens/view_all_events.dart';
 import 'package:big_fun_app/screens/view_events_with_detail.dart';
+import 'package:big_fun_app/screens/view_payment_successful.dart';
 import 'package:big_fun_app/screens/view_purchase_tickets.dart';
 import 'package:big_fun_app/views/payment_method_view.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +32,14 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/payment-method-view',
       builder: (context, state) => const PaymentMethodView(),
+    ),
+    GoRoute(
+      path: '/attendants/payment-successful/:id',
+      name: ViewPaymentSuccessful.name,
+      builder: (context, state) {
+        final eventId = state.pathParameters['id'] ?? '';
+        return ViewPaymentSuccessful(eventId: eventId);
+      },
     ),
   ],
 );

@@ -195,7 +195,7 @@ class _PurchaseForm extends StatelessWidget {
           FilledButton.tonalIcon(
             onPressed: (){
               purchaseCubit.onSubmit();
-              //context.go('/attendants/payment-successful/$eventId');
+              context.go('/attendants/payment-successful/$eventId');
             }, 
             icon: const Icon( Icons.shopping_cart),
             label: const Text('Buy tickets'),
