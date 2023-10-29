@@ -1,3 +1,5 @@
+import 'package:big_fun_app/screens/home.dart';
+import 'package:big_fun_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/loguin_page.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
 
-      home: LoginPage(),
+      home: HomePage(),
     );
 
   }
