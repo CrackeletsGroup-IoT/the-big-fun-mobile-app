@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'dart:io';                               //importar .io
+import 'dart:io';
+import 'package:big_fun_app/models/event.dart';
 import 'package:http/http.dart' as http;
-import '../models/event.dart';
+
+
 
 class EventService{
 
@@ -30,6 +32,22 @@ class EventService{
     return [];
   }
 
+  Future<Event?> getById(String id) async{
+
+    http.Response response=await http.get(Uri.parse("$baseUrl/$id"));
+
+    if(response.statusCode==HttpStatus.ok){
+
+      final jsonResponse=json.decode(response.body);
+
+      final event=Event.fromJson(jsonResponse);
+
+      return event;
+    }
+    return null;
+  }
+
 }
+
 
 

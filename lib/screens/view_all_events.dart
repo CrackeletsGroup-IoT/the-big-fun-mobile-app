@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,8 @@ import '../utils/functions.dart';
 class ViewAllEvents extends StatefulWidget {
 
   const ViewAllEvents({super.key});
+
+  static const name = 'events-screen';
 
   @override
   State<ViewAllEvents> createState() => _ViewAllEventsState();
@@ -56,20 +59,20 @@ class _ViewAllEventsState extends State<ViewAllEvents> {
   @override
   Widget build(BuildContext context) {
 
-    Color color_background = Color(0xFF6363A3);
+    Color colorBackground = const Color(0xFF6363A3);
 
     return Scaffold(
 
-      backgroundColor: color_background,
+      backgroundColor: colorBackground,
 
       appBar: AppBar(
-        title: Text('Event List'),
-        backgroundColor: color_background, // Cambia el color del AppBar aquí
+        title: const Text('Event List'),
+        backgroundColor: colorBackground, // Cambia el color del AppBar aquí
         centerTitle: true, // Centra el texto en el AppBar
       ),
 
       body: Container(
-        color: color_background, // Color de fondo
+        color: colorBackground, // Color de fondo
         child: PagedListView<int,Event>(
           pagingController: _pagingController,
           builderDelegate: PagedChildBuilderDelegate<Event>(
@@ -107,16 +110,16 @@ class _EventItemState extends State<EventItem> {
     final event=widget.event;
     final image = getImageEvent(widget.event?.image??"");  //llama al metodo de FUNCTIONS
 
-    Color color_button = Colors.black;
-    Color color_text_button = Colors.white;
-    Color card_color = Colors.white;
-    Color color_text_title = Color(0xFF035397);
-    Color color_text = Colors.black;
+    Color colorButton = Colors.black;
+    Color colorTextButton = Colors.white;
+    Color cardColor = Colors.white;
+    Color colorTextTitle = const Color(0xFF035397);
+    Color colorText = Colors.black;
 
 
     return Card(
       elevation: 2,
-      color: card_color,
+      color: cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0), // Ajusta el radio según tus necesidades
       ),
@@ -126,17 +129,17 @@ class _EventItemState extends State<EventItem> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 8), // Espacio entre el título y la siguiente fila
+            const SizedBox(height: 8), // Espacio entre el título y la siguiente fila
             Align(
               alignment: Alignment.center,
               child: Text(event?.name ?? "",
                 style: TextStyle(
-                  color: color_text_title,
+                  color: colorTextTitle,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 8), // Espacio entre el título y la siguiente fila
+            const SizedBox(height: 8), // Espacio entre el título y la siguiente fila
 
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -153,32 +156,32 @@ class _EventItemState extends State<EventItem> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Date :", style: TextStyle(color: color_text_title)),
-                      Text("Cost   :", style: TextStyle(color: color_text_title)),
-                      Text("Address :", style: TextStyle(color: color_text_title)),
+                      Text("Date :", style: TextStyle(color: colorTextTitle)),
+                      Text("Cost   :", style: TextStyle(color: colorTextTitle)),
+                      Text("Address :", style: TextStyle(color: colorTextTitle)),
                     ],
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
                       Text(
                         DateFormat('yyyy-MM-dd').format(event?.date ?? DateTime.now()),
-                        style: TextStyle(color: color_text),
+                        style: TextStyle(color: colorText),
                       ),
 
-                      Text('S/${event?.cost.toString() ?? ""}',style: TextStyle(color: color_text)),
+                      Text('S/${event?.cost.toString() ?? ""}',style: TextStyle(color: colorText)),
 
                       Tooltip(
                         message: event?.address ?? "",
                         child: Text(
                           event?.address ?? "",
-                          style: TextStyle(color: color_text),
+                          style: TextStyle(color: colorText),
                         ),
                       ),
                     ],
@@ -186,20 +189,21 @@ class _EventItemState extends State<EventItem> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Align(
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  // Define lo que hace el botón "Details"
+                  GoRouter.of(context)
+                          .go('/attendants/events/${event?.id}');
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: color_button,
+                  backgroundColor: colorButton,
                 ),
                 child: Text(
                   "Details",
                   style: TextStyle(
-                    color: color_text_button,
+                    color: colorTextButton,
                     fontSize: 16,
                   ),
                 ),
