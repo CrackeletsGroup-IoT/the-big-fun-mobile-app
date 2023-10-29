@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   // different pages to navigate to
 
   final List<Widget>_children=[
-    const Home(),
+    Home(),
     const ViewAllEvents(),
     // const UserReels(),
     // const UserShop(),

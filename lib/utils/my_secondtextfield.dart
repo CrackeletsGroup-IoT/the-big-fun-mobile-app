@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+
+class MySecondTextField extends StatelessWidget {
+
+  final controller;
+  final String hintText;
+  final bool obscureText;
+
+  const MySecondTextField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.obscureText
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 60),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black45),
+            //borderRadius: BorderRadius.circular(18),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+          fillColor: Colors.white,//Darle color al interior del textBox
+          filled: true,// Si sepinta o no se pinta el interior del textbox
+          hintText: hintText,
+        ),
+      ),
+    );
+  }
+}
