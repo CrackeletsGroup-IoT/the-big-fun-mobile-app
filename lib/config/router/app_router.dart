@@ -1,5 +1,7 @@
 import 'package:big_fun_app/screens/view_all_events.dart';
 import 'package:big_fun_app/screens/view_events_with_detail.dart';
+import 'package:big_fun_app/screens/view_purchase_tickets.dart';
+import 'package:big_fun_app/views/payment_method_view.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -17,6 +19,18 @@ final appRouter = GoRouter(
         final eventId = state.pathParameters['id'] ?? '';
         return ViewEventsWithDetail(eventId: eventId);
       },
+    ),
+    GoRoute(
+      path: '/attendants/purchase-tickets/:id',
+      name: ViewPurchaseTickets.name,
+      builder: (context, state) {
+        final eventId = state.pathParameters['id'] ?? '';
+        return ViewPurchaseTickets(eventId: eventId);
+      },
+    ),
+    GoRoute(
+      path: '/payment-method-view',
+      builder: (context, state) => const PaymentMethodView(),
     ),
   ],
 );
