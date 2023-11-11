@@ -1,4 +1,6 @@
 
+import 'package:big_fun_app/screens/home.dart';
+import 'package:big_fun_app/screens/home_page.dart';
 import 'package:big_fun_app/utils/my_button.dart';
 import 'package:big_fun_app/utils/my_textfield.dart';
 import 'package:big_fun_app/utils/square_tile.dart';
@@ -93,7 +95,7 @@ class LoginPage extends StatelessWidget {
                     children: [
                       MyButton(
                         text: "         Sign In         ",
-                        onTap: signUserIn,
+                        onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),)),
                       ),
 /*                  MyButton(
                         text: "     Sign Up     ",

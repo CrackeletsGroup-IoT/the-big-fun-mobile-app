@@ -42,10 +42,10 @@ class _HomePageState extends State<HomePage> {
           onTap: _navigationBottonNavBar,
           type: BottomNavigationBarType.fixed,// Si no le pongo fixed no aparece el BottomNavigationBar
           //backgroundColor: Color(0xFF53105C),
-          items: [
-            const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            const BottomNavigationBarItem(icon: Icon(Icons.stadium), label: 'My Events'),
-            const BottomNavigationBarItem(icon: Icon(Icons.people), label: 'FAQ'),
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.stadium), label: 'My Events'),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: 'FAQ'),
           ],
         ),
       ),
