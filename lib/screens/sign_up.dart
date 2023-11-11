@@ -1,4 +1,5 @@
 
+import 'package:big_fun_app/screens/home_page.dart';
 import 'package:big_fun_app/services/user_service.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +31,8 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
 
     Color color_background = Colors.white;
-    Color color_text_box= Color(0xFF53105C);
-    Color color_border_box= Color(0xFF53105C);
+    Color color_text_box= const Color(0xFF53105C);
+    Color color_border_box= const Color(0xFF53105C);
     Color color_text = Colors.black;
     Color color_text_button= Colors.white;
 
@@ -47,14 +48,14 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
 
-              SizedBox(height: 85), // Espacio entre la imagen y los cuadros de texto
+              const SizedBox(height: 85), // Espacio entre la imagen y los cuadros de texto
 
               Image.asset(
                 'assets/logo.png', // Asegúrate de poner el nombre correcto de tu imagen
                 width: 300, // Ajusta el ancho según tus necesidades
               ),
 
-              SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
+              const SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
 
               Container(
                 width: 300,
@@ -95,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
+              const SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
 
               Container(
                 width: 300,
@@ -135,7 +136,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              SizedBox(height: 10), // Espacio entre los cuadros de texto
+              const SizedBox(height: 10), // Espacio entre los cuadros de texto
 
               Container(
                 width: 300,
@@ -161,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                     if (!isValid) {
                       // Muestra un SnackBar con el mensaje de error
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('The email is incorrect'),
                           behavior: SnackBarBehavior.floating, // Mantener el SnackBar visible
                         ),
@@ -189,7 +190,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              SizedBox(height: 10), // Espacio entre los cuadros de texto
+              const SizedBox(height: 10), // Espacio entre los cuadros de texto
 
               Container(
                 width: 300,
@@ -230,7 +231,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
 
-              SizedBox(height: 30), // Espacio entre los cuadros de texto y el botón
+              const SizedBox(height: 30), // Espacio entre los cuadros de texto y el botón
 
               Align(
                 alignment: Alignment.center,
@@ -244,17 +245,22 @@ class _SignUpState extends State<SignUp> {
                       nameController.text,
                       emailController.text,
                       //passwordController.text,
+
                     );
 
                     if (attendeeCreated) {
                       // Si el user fue creado correctamente
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Account created successfully'),
                           behavior: SnackBarBehavior.floating,
                         ),
                       );
-                    }
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(),));
+
+                    };
+
                   } : null,
 
                   style: ElevatedButton.styleFrom(
@@ -263,7 +269,7 @@ class _SignUpState extends State<SignUp> {
                       borderRadius: BorderRadius.circular(80), // Ajusta el radio según tus necesidades
                     ),
 
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40), // Ajusta el padding del botón
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40), // Ajusta el padding del botón
 
                     //PARA QUE SE HABILITE O DESHABILITE EL BOTON
                     elevation: 2,// Si no todos los campos están llenos, desactiva la elevación

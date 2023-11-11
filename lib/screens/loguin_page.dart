@@ -154,7 +154,7 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(width: 5,),
 
                       GestureDetector(
-                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp(),));},
+                        onTap: (){ Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp(),));},
                         child: const Text(
                           'Register now',
                           style: TextStyle(
