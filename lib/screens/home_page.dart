@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget>_children=[
     Home(),
     const ViewAllEvents(),
-    //const FAQItem(question: question, answer: answer),
+    const Faq(),
     // const UserShop(),
     // const UserAccount(),
   ];
