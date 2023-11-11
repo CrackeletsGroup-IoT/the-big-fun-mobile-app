@@ -1,6 +1,7 @@
 
 import 'package:big_fun_app/screens/home.dart';
 import 'package:big_fun_app/screens/home_page.dart';
+import 'package:big_fun_app/screens/sign_up.dart';
 import 'package:big_fun_app/utils/my_button.dart';
 import 'package:big_fun_app/utils/my_textfield.dart';
 import 'package:big_fun_app/utils/square_tile.dart';
@@ -142,7 +143,7 @@ class LoginPage extends StatelessWidget {
 
                   const SizedBox(height: 40,),
 
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -152,11 +153,14 @@ class LoginPage extends StatelessWidget {
 
                       SizedBox(width: 5,),
 
-                      Text(
-                        'Register now',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp(),));},
+                        child: Text(
+                          'Register now',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       )
                     ],
