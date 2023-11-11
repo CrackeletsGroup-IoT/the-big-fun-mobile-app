@@ -146,16 +146,16 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'Not a member?',
                         style: TextStyle(color: Colors.black),
                       ),
 
-                      SizedBox(width: 5,),
+                      const SizedBox(width: 5,),
 
                       GestureDetector(
                         onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp(),));},
-                        child: Text(
+                        child: const Text(
                           'Register now',
                           style: TextStyle(
                             color: Colors.blue,
