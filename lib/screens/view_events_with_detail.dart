@@ -2,7 +2,6 @@ import 'package:big_fun_app/models/event.dart';
 import 'package:big_fun_app/services/event_service.dart';
 import 'package:big_fun_app/utils/functions.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 
@@ -77,7 +76,7 @@ class _EventsWithDetailsScreenState extends State<ViewEventsWithDetail> {
         title: Text(event?.name ?? 'No data'),
         leading: IconButton(
           onPressed: () {
-            context.go('/attendants/events');
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
         ),
