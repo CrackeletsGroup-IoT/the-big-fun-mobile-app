@@ -17,6 +17,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
+
   #aqui agrego todas las dependencias
   http: ^1.1.0
   sqflite: ^2.3.0
@@ -24,6 +25,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   # para el date
   intl: ^0.18.1
+  go_router: ^12.0.0
 
 dev_dependencies:
   flutter_test:
