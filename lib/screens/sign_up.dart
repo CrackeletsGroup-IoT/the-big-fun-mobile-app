@@ -30,14 +30,14 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
 
-    Color color_background = Colors.white;
-    Color color_text_box= const Color(0xFF53105C);
-    Color color_border_box= const Color(0xFF53105C);
-    Color color_text = Colors.black;
-    Color color_text_button= Colors.white;
+    Color colorBackground = Colors.white;
+    Color colorTextBox= const Color(0xFF53105C);
+    Color colorBorderBox= const Color(0xFF53105C);
+    Color colorText = Colors.black;
+    Color colorTextButton= Colors.white;
 
     return Scaffold(
-      backgroundColor: color_background, // Cambia el color de fondo aquí
+      backgroundColor: colorBackground, // Cambia el color de fondo aquí
 
       body: SingleChildScrollView(
 
@@ -57,7 +57,7 @@ class _SignUpState extends State<SignUp> {
 
               const SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
 
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
 
@@ -65,15 +65,15 @@ class _SignUpState extends State<SignUp> {
 
                   decoration: InputDecoration(
                     labelText: 'UserName',
-                    labelStyle: TextStyle(color: color_text_box),
+                    labelStyle: TextStyle(color: colorTextBox),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                   ),
-                  style: TextStyle(color: color_text),
+                  style: TextStyle(color: colorText),
 
 
                   //VALIDA QUE EL CAMPO ESTE LLENO
@@ -98,7 +98,7 @@ class _SignUpState extends State<SignUp> {
 
               const SizedBox(height: 20), // Espacio entre la imagen y los cuadros de texto
 
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
 
@@ -106,15 +106,15 @@ class _SignUpState extends State<SignUp> {
 
                   decoration: InputDecoration(
                     labelText: 'Name',
-                    labelStyle: TextStyle(color: color_text_box),
+                    labelStyle: TextStyle(color: colorTextBox),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                   ),
-                  style: TextStyle(color: color_text),
+                  style: TextStyle(color: colorText),
 
                   //VALIDA QUE EL CAMPO ESTE LLENO
                   onChanged: (value){
@@ -138,7 +138,7 @@ class _SignUpState extends State<SignUp> {
 
               const SizedBox(height: 10), // Espacio entre los cuadros de texto
 
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
 
@@ -146,15 +146,15 @@ class _SignUpState extends State<SignUp> {
 
                   decoration: InputDecoration(
                     labelText: 'Email',
-                    labelStyle: TextStyle(color: color_text_box),
+                    labelStyle: TextStyle(color: colorTextBox),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                   ),
-                  style: TextStyle(color: color_text),
+                  style: TextStyle(color: colorText),
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
                     RegExp emailRegex = RegExp(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',);
@@ -192,7 +192,7 @@ class _SignUpState extends State<SignUp> {
 
               const SizedBox(height: 10), // Espacio entre los cuadros de texto
 
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
 
@@ -200,15 +200,15 @@ class _SignUpState extends State<SignUp> {
 
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: color_text_box),
+                    labelStyle: TextStyle(color: colorTextBox),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: color_border_box, width: 2.0),
+                      borderSide: BorderSide(color: colorBorderBox, width: 2.0),
                     ),
                   ),
-                  style: TextStyle(color: color_text),
+                  style: TextStyle(color: colorText),
                   obscureText: true, // Para ocultar la contraseña
 
                   //VALIDA QUE EL CAMPO ESTE LLENO
@@ -264,7 +264,7 @@ class _SignUpState extends State<SignUp> {
                   } : null,
 
                   style: ElevatedButton.styleFrom(
-                    primary: color_border_box,
+                    primary: colorBorderBox,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80), // Ajusta el radio según tus necesidades
                     ),
@@ -277,7 +277,7 @@ class _SignUpState extends State<SignUp> {
                   child: Text(
                     "SignUp",
                     style: TextStyle(
-                      color: color_text_button,
+                      color: colorTextButton,
                       fontSize: 25,
                     ),
                   ),

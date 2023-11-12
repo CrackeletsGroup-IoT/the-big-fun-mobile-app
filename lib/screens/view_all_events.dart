@@ -1,4 +1,5 @@
-import 'package:go_router/go_router.dart';
+import 'package:big_fun_app/screens/view_events_with_detail.dart';
+import 'package:big_fun_app/screens/view_purchase_tickets.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -194,8 +195,7 @@ class _EventItemState extends State<EventItem> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context)
-                          .go('/attendants/events/${event?.id}');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ViewEventsWithDetail(eventId: (event?.id).toString())));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorButton,
@@ -209,6 +209,26 @@ class _EventItemState extends State<EventItem> {
                 ),
               ),
             ),
+            const SizedBox(width: 40),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ViewPurchaseTickets(eventId: (event?.id).toString())));
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(colorButton),
+                    ),
+                    child: Text(
+                      "Buy Tickets",
+                      style: TextStyle(
+                        color: colorTextButton,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
           ],
         ),
       ),

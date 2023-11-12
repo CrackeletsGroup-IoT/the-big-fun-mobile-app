@@ -32,15 +32,15 @@ class _FaqState extends State<Faq> {
 
   @override
   Widget build(BuildContext context) {
-    Color color_background = Color.fromARGB(255, 99, 99, 163);
+    Color colorBackground = const Color.fromARGB(255, 99, 99, 163);
     return Scaffold(
       appBar: AppBar(
-        title: Text("FAQs"),
-        backgroundColor: Color.fromARGB(255, 99, 99, 163),
+        title: const Text("FAQs"),
+        backgroundColor: const Color.fromARGB(255, 99, 99, 163),
         centerTitle: true,
       ),
       body: Container(
-        color: color_background,
+        color: colorBackground,
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -48,13 +48,13 @@ class _FaqState extends State<Faq> {
                 return SizedBox(
                   width: 300,
                   child: Container(
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(16.0),
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.white, // Fondo blanco del Container
                       border: Border.all(
                         width: 2,
-                        color: Color.fromARGB(255, 250, 250, 250),
+                        color: const Color.fromARGB(255, 250, 250, 250),
                       ),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
@@ -63,15 +63,15 @@ class _FaqState extends State<Faq> {
                       children: [
                         Text(
                           item.question,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 8, width: 50,),
+                        const SizedBox(height: 8, width: 50,),
                         Text(
                           item.answer,
-                          style: TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14),
                         ),
                       ],
                     ),

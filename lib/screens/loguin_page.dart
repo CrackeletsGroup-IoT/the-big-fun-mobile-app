@@ -1,5 +1,5 @@
 
-import 'package:big_fun_app/screens/home.dart';
+
 import 'package:big_fun_app/screens/home_page.dart';
 import 'package:big_fun_app/screens/sign_up.dart';
 import 'package:big_fun_app/utils/my_button.dart';
@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                   ),*/
                   const SizedBox(height: 50,),
 
-                  Container(
+                  SizedBox(
                       width: 180,
                       //height: 100,
                       child:

@@ -1,5 +1,4 @@
 import 'package:big_fun_app/screens/view_all_events.dart';
-import 'package:big_fun_app/utils/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -96,7 +95,7 @@ class _HomeState extends State<Home> {
           
           //Text("Popular Events",style: TextStyle(fontSize: 20),),
           
-          Expanded(child: ViewAllEvents())
+          const Expanded(child: ViewAllEvents())
           
 
 
