@@ -157,9 +157,15 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(color: colorText),
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
-                    RegExp emailRegex = RegExp(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',);
+                    RegExp emailRegex = RegExp(r'^[a-zA-Z0-9.!#$%&\*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$', );
+
+                    // Imprime la dirección de correo electrónico
+                    print('Email: $value');
+
                     bool isValid = emailRegex.hasMatch(value);
+
                     if (!isValid) {
+                      //print('Valid: $isValid');
                       // Muestra un SnackBar con el mensaje de error
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -168,8 +174,11 @@ class _SignUpState extends State<SignUp> {
                         ),
                       );
                     } else {
-                      // Si el correo es válido, cierra el SnackBar
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      //print('Valid: $isValid');
+                      // Si el correo es válido, cierra el SnackBar si es el relacionado con el mensaje de correo incorrecto
+                      if (ScaffoldMessenger.of(context).mounted) {
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      }
                     }
 
                     setState(() {
@@ -185,7 +194,7 @@ class _SignUpState extends State<SignUp> {
                       }
                     }
 
-                    );
+                   );
                   },
                 ),
               ),
