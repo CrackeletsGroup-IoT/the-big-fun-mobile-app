@@ -6,7 +6,7 @@ class UserService {
   Future<bool> createUser(String userName, String name, String email) async {
 
     //https://the-big-fun-402823.rj.r.appspot.com/api/v1/attendees
-    final url = Uri.parse('https://the-big-fun-402823.rj.r.appspot.com/api/v1/attendees');
+    final url = Uri.parse('https://thebigfun.uc.r.appspot.com/api/v1/attendees');
 
     final Map<String, dynamic> userData = {
       'userName': userName,
