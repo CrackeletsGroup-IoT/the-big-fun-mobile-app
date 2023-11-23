@@ -1,8 +1,16 @@
 import 'package:big_fun_app/screens/view_all_events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../models/event.dart';
+import '../services/event_service.dart';
+import '../utils/my_event_item.dart';
+import '../utils/navigation_drawer.dart';
 
 class Home extends StatefulWidget {
+
+  static const name = 'events-screen';
 
   Home({super.key,});
 
@@ -15,6 +23,40 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  //"_"-> indica que es privado
+  EventService? _eventService;
+
+  //para la paginacion
+  final _pageSize=20;
+  final PagingController<int,Event>_pagingController=PagingController(firstPageKey: 0);
+
+  @override
+  void initState(){
+    //inicializa el servicio
+    _eventService=EventService();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.initState();
+  }
+
+  Future _fetchPage(int pageKey) async {
+    try {
+
+      //trae todos los pokemons
+      final events = await _eventService?.getAll(pageKey, _pageSize)??[];
+
+      final isLastPage = events.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(events);
+      } else {
+        final nextPageKey = pageKey + 1;
+        _pagingController.appendPage(events, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
 
   toAllEvents(){
     Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewAllEvents(),));
@@ -22,88 +64,28 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    Color colorBackground = const Color(0xFF6363A3);
+
     return Scaffold(
-      body: Column(
-        children: [
 
+      backgroundColor: colorBackground,
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Container(
-                  height: 90,
-                  child: Image.asset('assets/logo.png'),
-                ),
-              ),
-
-
-              GestureDetector(
-
-                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewAllEvents(),)),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.symmetric(horizontal: 1),
-
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.black)
-                  ),
-
-                  child: const Center(
-                    child: Text(
-                      "All Events",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller:widget.searchController,
-                    obscureText: widget.obscureText,
-                    decoration: const InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black45),
-                        //borderRadius: BorderRadius.circular(18),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                      ),
-                      fillColor: Colors.white,//Darle color al interior del textBox
-                      filled: true,// Si sepinta o no se pinta el interior del textbox
-                      hintText: "Search Events",
-                    ),
-                  ),
-                ),
-              )
-
-            ],
-          ),
-
-          //SizedBox(height: 10,),
-          
-          //Text("Popular Events",style: TextStyle(fontSize: 20),),
-          
-          const Expanded(child: ViewAllEvents())
-          
-
-
-
-
-
-        ],
+      appBar: AppBar(
+        title: Center(child: Text("Popular Events")),
+        backgroundColor: colorBackground, // Cambia el color del AppBar aquí
       ),
+      drawer: const Navigation(),
+      body: Container(
+        color: colorBackground, // Color de fondo
+        child: PagedListView<int,Event>(
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate<Event>(
+            itemBuilder: (context,item,index)=>MyEventItem(event: item),
+          ),
+        ),
+      ),
+
     );
   }
 }

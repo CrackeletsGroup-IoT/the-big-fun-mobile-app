@@ -24,6 +24,30 @@ class Event{
       }
       );
 
+  Map<String,dynamic>toMap(){
+    return{
+      'id':id,
+      'name':name,
+      'address':address,
+      'capacity':capacity,
+      'image':image,
+      'date':date,
+      'cost':cost,
+      'district':district,
+
+    };
+  }
+
+  Event.fromMap(Map<String,dynamic>map):
+        id=map['id'],
+        name=map['name'],
+        address=map['address'],
+        capacity=map['capacity'],
+        image=map['image'],
+        date=map['date'],
+        cost=map['cost'],
+        district=map['district'];
+
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
       id: json["id"],
@@ -42,6 +66,9 @@ class Event{
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     return Event.fromJson(jsonMap);
   }
+
+
+
 }
 
 

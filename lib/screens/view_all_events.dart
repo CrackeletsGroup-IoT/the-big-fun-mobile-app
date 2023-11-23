@@ -1,5 +1,6 @@
 import 'package:big_fun_app/screens/view_events_with_detail.dart';
 import 'package:big_fun_app/screens/view_purchase_tickets.dart';
+import 'package:big_fun_app/utils/navigation_drawer.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -71,7 +72,7 @@ class _ViewAllEventsState extends State<ViewAllEvents> {
         backgroundColor: colorBackground, // Cambia el color del AppBar aquí
         centerTitle: true, // Centra el texto en el AppBar
       ),
-
+      drawer: const Navigation(),
       body: Container(
         color: colorBackground, // Color de fondo
         child: PagedListView<int,Event>(
