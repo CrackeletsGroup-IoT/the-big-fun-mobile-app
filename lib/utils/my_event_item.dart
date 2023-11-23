@@ -1,3 +1,4 @@
+import 'package:big_fun_app/repositories/event_repository.dart';
 import 'package:big_fun_app/services/event_service.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ import '../utils/functions.dart';
 
 class MyEventItem extends StatefulWidget {
 
-  final Event? event;
+  final Event event;
 
   const MyEventItem({super.key, required this.event});
 
@@ -21,11 +22,25 @@ class MyEventItem extends StatefulWidget {
 
 class _MyEventItemState extends State<MyEventItem> {
 
-  EventService? _eventService;
-  List? _events;
 
+  bool _favorite=false;
+  EventRepository? _repository;
 
+  initialize() async {
+    _favorite = await _repository?.isFavorite(widget.event)??false;
+    if(mounted){
+      setState(() {
+        _favorite = _favorite;
+      });
+    }
+  }
 
+  @override
+  void initState() {
+    _repository=EventRepository();
+    initialize();
+    super.initState();
+  }
 
 
   @override

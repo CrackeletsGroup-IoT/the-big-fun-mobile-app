@@ -82,6 +82,18 @@ class _BuildMenuItemsState extends State<BuildMenuItems> {
           },
         ),
 
+        ListTile(
+          leading: const Icon(Icons.favorite,color: Colors.red),
+          title:const Text('Favorites'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) {
+              return const ViewAllEvents();
+            },)
+            );
+          },
+        ),
+
 
 
 
