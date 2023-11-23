@@ -130,7 +130,12 @@ class _MyEventItemState extends State<MyEventItem> {
                   IconButton(
                     icon: Icon(Icons.favorite),
                     onPressed: () {
-
+                      setState(() {
+                        _favorite=!_favorite;
+                      });
+                      _favorite
+                          ?_repository?.insert(widget.event)
+                          :_repository?.delete(widget.event);
                     },
                   )
                 ],
