@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class EventService{
 
-  final baseUrl="https://the-big-fun-402823.rj.r.appspot.com/api/v1/events";
+  final baseUrl="https://thebigfun.uc.r.appspot.com/api/v1/events";
 
   //devuelve en algun momento una lista
   Future<List<Event>?> getAll(int page, int size) async{
