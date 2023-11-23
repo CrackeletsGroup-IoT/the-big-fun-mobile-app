@@ -1,3 +1,4 @@
+import 'package:big_fun_app/services/event_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:big_fun_app/screens/view_events_with_detail.dart';
@@ -19,8 +20,18 @@ class MyEventItem extends StatefulWidget {
 }
 
 class _MyEventItemState extends State<MyEventItem> {
+
+  EventService? _eventService;
+  List? _events;
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
 
     //definir la imagen antes de añadirla en el card
     final event=widget.event;
@@ -78,22 +89,36 @@ class _MyEventItemState extends State<MyEventItem> {
               ),
             ),
             const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.center,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ViewEventsWithDetail(eventId: (event?.id).toString())));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: colorButton,
-                ),
-                child: Text(
-                  "Details",
-                  style: TextStyle(
-                    color: colorTextButton,
-                    fontSize: 16,
+            Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewEventsWithDetail(eventId: (event?.id).toString())));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorButton,
+                      ),
+                      child: Text(
+                        "Details",
+                        style: TextStyle(
+                          color: colorTextButton,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+
+                    },
+                  )
+                ],
               ),
             ),
             const SizedBox(width: 40),
