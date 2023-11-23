@@ -46,7 +46,8 @@ class _MyEventItemState extends State<MyEventItem> {
   @override
   Widget build(BuildContext context) {
 
-
+    final icon = _favorite?const Icon(Icons.favorite,color: Colors.red,)
+        :const Icon(Icons.favorite,color: Colors.grey,);
 
     //definir la imagen antes de añadirla en el card
     final event=widget.event;
@@ -128,7 +129,7 @@ class _MyEventItemState extends State<MyEventItem> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.favorite),
+                    icon: icon,
                     onPressed: () {
                       setState(() {
                         _favorite=!_favorite;
