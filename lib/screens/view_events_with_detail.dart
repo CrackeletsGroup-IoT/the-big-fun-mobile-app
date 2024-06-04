@@ -47,7 +47,7 @@ class _EventsWithDetailsScreenState extends State<ViewEventsWithDetail> {
     const box = SizedBox(
       height: 30,
     );
-    final image = getImageEvent(event?.image ??
+    final image = getImageEvent(event?.imageUrl ??
         "https://blog.sinapsis.agency/wp-content/uploads/2021/04/DEFINICIONES.-ERROR-404.png");
     final textStyles = TextTheme(
       titleLarge: TextStyle(

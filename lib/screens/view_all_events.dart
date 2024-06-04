@@ -109,7 +109,7 @@ class _EventItemState extends State<EventItem> {
 
     //definir la imagen antes de añadirla en el card
     final event=widget.event;
-    final image = getImageEvent(widget.event?.image??"");  //llama al metodo de FUNCTIONS
+    final image = getImageEvent(widget.event?.imageUrl??"");  //llama al metodo de FUNCTIONS
 
     Color colorButton = Colors.black;
     Color colorTextButton = Colors.white;

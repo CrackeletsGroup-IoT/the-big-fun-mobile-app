@@ -7,7 +7,7 @@ class Event{
   String name;
   String address;
   int capacity;
-  String image;
+  String imageUrl;
   DateTime date;
   int cost;
   String district;
@@ -17,27 +17,26 @@ class Event{
         required this.name,
         required this.address,
         required this.capacity,
-        required this.image,
+        required this.imageUrl,
         required this.date,
         required this.cost,
         required this.district
       }
       );
 
-  factory Event.fromJson(Map<String, dynamic> json) {
+  static Event fromJson(Map<String, dynamic> json) {
     return Event(
-      id: json["id"],
-      name: json["name"],
-      address: json["address"],
-      capacity: json["capacity"],
-      image: json["image"],
+      id: json["id"] as int,
+      name: json["name"] as String,
+      address: json["address"] as String,
+      capacity: json["capacity"] as int,
+      imageUrl: json["imageUrl"] as String,
       date: DateTime.parse(json["date"]),
-      cost: json["cost"],
-      district: json["district"],
+      cost: json["cost"] as int,
+      district: json["district"] as String,
     );
   }
 
-  // Nuevo constructor que toma un String (JSON) y lo convierte a un Event
   factory Event.fromJsonString(String jsonString) {
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     return Event.fromJson(jsonMap);

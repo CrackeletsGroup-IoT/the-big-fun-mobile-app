@@ -43,7 +43,7 @@ class _ViewPurchaseTicketsState extends State<ViewPurchaseTickets> {
 
   @override
   Widget build(BuildContext context) {
-    final image = getImageEvent(event?.image ??
+    final image = getImageEvent(event?.imageUrl ??
         "https://blog.sinapsis.agency/wp-content/uploads/2021/04/DEFINICIONES.-ERROR-404.png");
 
 
