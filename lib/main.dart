@@ -1,3 +1,4 @@
+import 'package:big_fun_app/screens/view_my_events.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/loguin_page.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
 
-      home: LoginPage(),
+      //home: LoginPage(),
+      home: ViewMyEvents()
     );
 
   }

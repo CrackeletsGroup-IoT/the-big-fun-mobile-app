@@ -273,7 +273,6 @@ class _SignUpState extends State<SignUp> {
                   } : null,
 
                   style: ElevatedButton.styleFrom(
-                    primary: colorBorderBox,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80), // Ajusta el radio según tus necesidades
                     ),
