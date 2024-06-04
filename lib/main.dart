@@ -1,3 +1,4 @@
+import 'package:big_fun_app/screens/attendees_list.dart';
 import 'package:big_fun_app/screens/view_my_events.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       //home: LoginPage(),
-      home: ViewMyEvents()
+      home: ViewMyEvents(),
     );
 
   }

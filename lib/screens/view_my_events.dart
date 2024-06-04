@@ -1,4 +1,5 @@
 import 'package:big_fun_app/models/event.dart';
+import 'package:big_fun_app/screens/attendees_list.dart';
 import 'package:big_fun_app/services/organizer_event_service.dart';
 import 'package:flutter/material.dart';
 
@@ -153,7 +154,7 @@ class _ViewMyEventsState extends State<ViewMyEvents> {
                                                 borderRadius: BorderRadius.all(Radius.circular(8)),
                                               ),
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>AttendeesList(event: event)));},
                                             child: Text(
                                               "Invitados",
                                               style: TextStyle(
