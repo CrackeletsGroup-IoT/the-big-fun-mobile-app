@@ -2,6 +2,7 @@ import 'package:big_fun_app/models/attendees.dart';
 import 'package:big_fun_app/models/event.dart';
 import 'package:big_fun_app/screens/attendees_details.dart';
 import 'package:big_fun_app/services/attendees_list_service.dart';
+import 'package:big_fun_app/screens/scan_qr_attendee.dart';
 import 'package:flutter/material.dart';
 
 List<String> status = ["NO PRESENTE", "PRESENTE", "NO PRESENTE"];
@@ -23,10 +24,17 @@ class _AttendeesListState extends State<AttendeesList> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text("PARTICIPANTES", style: TextStyle(color: Color(0xff6363A3), letterSpacing: 2,
-                                wordSpacing: 2, fontWeight: FontWeight.w700, fontSize: 18),),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text("PARTICIPANTES", style: TextStyle(color: Color(0xff6363A3), letterSpacing: 2,
+                                    wordSpacing: 2, fontWeight: FontWeight.w700, fontSize: 18),),
+                  ),
+                  IconButton(icon: Icon(Icons.add), onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ScanQrAttendee()));
+                  },)
+                ],
               ),
               FutureBuilder(
                 initialData: [],
@@ -60,14 +68,14 @@ class _AttendeesListState extends State<AttendeesList> {
                                     width: MediaQuery.sizeOf(context).width / 3,
                                     padding: EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: status[index] == "PRESENTE" ? Color(0xffBBFFBF) : Color(0xffFFC0C0),
+                                      color: attendee.iotDevice != null ? Color(0xffBBFFBF) : Color(0xffFFC0C0),
                                       borderRadius: BorderRadius.all(Radius.circular(8)),
                                       border: Border.all(
                                         width: 2,
-                                        color: status[index] == "PRESENTE" ? Colors.green : Colors.red
+                                        color: attendee.iotDevice != null ? Colors.green : Colors.red
                                       )
                                     ),
-                                    child: Center(child: Text("${status[index]}", style: TextStyle(color: status[index] == "PRESENTE" ? Colors.green : Colors.red))),
+                                    child: Center(child: Text(attendee.iotDevice != null ? "PRESENTE" : "NO PRESENTE", style: TextStyle(color: attendee.iotDevice != null ? Colors.green : Colors.red))),
                                   ),
                                 ],
                               

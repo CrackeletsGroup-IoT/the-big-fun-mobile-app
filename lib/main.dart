@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
 
-      //home: LoginPage(),
-      home: ViewMyEvents(),
+      home: LoginPage(),
+      //home: ViewMyEvents(),
+
     );
 
   }
