@@ -12,18 +12,19 @@ import 'package:big_fun_app/services/web_socket_service.dart';
 import 'package:http/http.dart' as http;
 
 class AttendeesDetails extends StatefulWidget {
-  const AttendeesDetails({required this.attendee, super.key});
+  const AttendeesDetails({required this.attendee, required this.ioTDevice, super.key});
   final EventAttendee attendee;
+  final IoTDevice? ioTDevice;
 
   @override
-  State<AttendeesDetails> createState() => _AttendeesDetailsState(this.attendee);
+  State<AttendeesDetails> createState() => _AttendeesDetailsState(this.attendee, this.ioTDevice);
 }
 
 class _AttendeesDetailsState extends State<AttendeesDetails> {
-  _AttendeesDetailsState(this.attendee);
+  _AttendeesDetailsState(this.attendee, this.ioTDevice);
   final EventAttendee attendee;
   late Timer _timer;
-  late IoTDevice _iotDevice;
+  IoTDevice? ioTDevice;
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
     if (response.statusCode == 200) {
       setState(() {
         final rspta = json.decode(response.body);
-        _iotDevice = IoTDevice.fromJson(rspta);
+        ioTDevice = IoTDevice.fromJson(rspta);
       });
     } else {
       // Handle error
@@ -58,9 +59,9 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
         title: Text('Dispositivo IoT'),
       ),
       body: Center(
-        child: attendee.iotDevice == null || _iotDevice == null
+        child: attendee.iotDevice == null || ioTDevice == null
             ? Text('No hay nada')
-            : Text('Datos del Dispositivo: ${_iotDevice.pulse}'),
+            : Text('Datos del Dispositivo: ${ioTDevice?.pulse}'),
       ),
     );
   }

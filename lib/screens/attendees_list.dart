@@ -52,7 +52,7 @@ class _AttendeesListState extends State<AttendeesList> {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
                         child: GestureDetector(
                           onDoubleTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => AttendeesDetails(attendee: attendee),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => AttendeesDetails(attendee: attendee, ioTDevice: attendee.iotDevice,),));
                           },
                           child: Container(
                             decoration: BoxDecoration(
