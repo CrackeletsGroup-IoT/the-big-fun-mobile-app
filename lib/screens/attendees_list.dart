@@ -1,5 +1,7 @@
 import 'package:big_fun_app/models/attendees.dart';
+import 'package:big_fun_app/models/attendeeByEvent.dart';
 import 'package:big_fun_app/models/event.dart';
+import 'package:big_fun_app/models/eventAttendee.dart';
 import 'package:big_fun_app/screens/attendees_details.dart';
 import 'package:big_fun_app/services/attendees_list_service.dart';
 import 'package:big_fun_app/screens/scan_qr_attendee.dart';
@@ -45,7 +47,7 @@ class _AttendeesListState extends State<AttendeesList> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index){
-                      Attendees attendee = snapshot.data![index];
+                      EventAttendee attendee = snapshot.data![index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
                         child: GestureDetector(
@@ -63,7 +65,7 @@ class _AttendeesListState extends State<AttendeesList> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("${attendee.name}".toUpperCase(), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, wordSpacing: 4, letterSpacing: 2),),
+                                  Text("${attendee.attendees.name}".toUpperCase(), style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, wordSpacing: 4, letterSpacing: 2),),
                                   Container(
                                     width: MediaQuery.sizeOf(context).width / 3,
                                     padding: EdgeInsets.all(8),

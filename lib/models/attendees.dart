@@ -5,7 +5,6 @@ class Attendees{
   String userName;
   String name;
   String email;
-  IoTDevice? iotDevice = null;
 
 
   Attendees({
@@ -22,10 +21,6 @@ class Attendees{
       name: json["name"] as String,
       email: json["email"] as String,
     );
-  }
-
-  void setIoTDevice(IoTDevice? iotDevice){
-    this.iotDevice=iotDevice;
   }
   
 }
