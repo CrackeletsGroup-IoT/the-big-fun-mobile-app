@@ -1,15 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:big_fun_app/models/attendees.dart';
-import 'package:big_fun_app/models/event.dart';
 import 'package:big_fun_app/models/eventAttendee.dart';
-import 'package:big_fun_app/models/attendeeByEvent.dart';
 import 'package:big_fun_app/models/ioTDevice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:big_fun_app/services/web_socket_service.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class AttendeesDetails extends StatefulWidget {
@@ -26,9 +21,22 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
   final EventAttendee attendee;
   late Timer _timer;
   IoTDevice? ioTDevice;
+  late GoogleMapController mapController;
+  final LatLng _center = const LatLng(-12.104026662911233, -76.962901676701);
+  BitmapDescriptor YourLocationIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor FriendLocationIcon = BitmapDescriptor.defaultMarker;
+
+  void _onMapCreated(GoogleMapController controller){
+    mapController = controller;
+  }
+
+  void setCustomMarkerIcon(){
+    BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, "assets/profile_avatar.png").then((value) => YourLocationIcon = value);
+  }
 
   @override
   void initState() {
+    setCustomMarkerIcon();
     super.initState();
     _fetchData(); // Fetch initial data
     _timer = Timer.periodic(Duration(seconds: 5), (timer) => _fetchData());
@@ -41,17 +49,20 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
   }
 
   Future<void> _fetchData() async {
-    if(attendee.iotDevice != null)
-    {final response = await http.get(Uri.parse('https://the-big-fun.zeabur.app/api/v1/iot-devices/iotDevice/${attendee.iotDevice?.id}'));
-    if (response.statusCode == 200) {
-      setState(() {
-        final rspta = json.decode(response.body);
-        ioTDevice = IoTDevice.fromJson(rspta);
-      });
-    } else {
+  if (attendee.iotDevice != null) {
+    final response = await http.get(Uri.parse('https://the-big-fun.zeabur.app/api/v1/iot-devices/iotDevice/${attendee.iotDevice?.id}'));
+      if (response.statusCode == 200) {
+        if (mounted) { // Verifica si el widget está montado antes de llamar a setState
+          setState(() {
+            final rspta = json.decode(response.body);
+            ioTDevice = IoTDevice.fromJson(rspta);
+          });
+        }
+      } else {
       // Handle error
       print('Error fetching data: ${response.statusCode}');
-    }}
+      }
+    }
   }
 
   @override
@@ -70,7 +81,7 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"),
+                      image: AssetImage('assets/profile_avatar.png'),
                       fit: BoxFit.contain,
                     )
                   ),
@@ -129,14 +140,17 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
                   attendee.iotDevice != null ?
                   Column(
                     children: [
-                      Text("Dispositivo IoT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 36, letterSpacing: 2),),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text("Dispositivo IoT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 36, letterSpacing: 2),),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Icon(Icons.monitor_heart, color: Colors.white, size: 16,),
                               ),
                               Padding(
@@ -146,27 +160,131 @@ class _AttendeesDetailsState extends State<AttendeesDetails> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Text("${ioTDevice?.pulse}", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16)),
                           ),
                           
                         ],
                       ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: ioTDevice?.safe == true ? Color(0xffBBFFBF) : Color(0xffFFC0C0),
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                  border: Border.all(
+                                  width: 2,
+                                  color: ioTDevice?.safe == true ? Colors.green : Colors.red
+                                    )
+                                  ),
+                                child: Center(child: Text(ioTDevice?.safe == true  ? "SAFE" : "DANGER", style: TextStyle(color: ioTDevice?.safe == true? Colors.green : Colors.red))),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0, top: 10.0, bottom: 10.0),
+                            child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color: ioTDevice?.safe == true ?Colors.white.withOpacity(0.2) : Colors.white,
+                                ),
+                                color: Colors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.all(Radius.circular(8))
+                              ),
+                              child: Icon(Icons.local_hospital, color: ioTDevice?.safe == true ?Colors.white.withOpacity(0.2) : Colors.white)
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(8))
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.location_on, color: Colors.red, size: 16,),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Tu", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),),
+                                  ),
+                                ]
+                              ),
+                            ),
+                            Expanded(
+                              child: 
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(8))
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(child: Text("${ioTDevice?.distanceBetween} m", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),)),
+                                ),
+                              ),)
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(8))
+                              ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Icon(Icons.location_on, color: Colors.green, size: 16,),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Amigo", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),),
+                                  ),
+                                ]
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: ioTDevice?.safe == true ? Color(0xffBBFFBF) : Color(0xffFFC0C0),
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            border: Border.all(
-                            width: 2,
-                            color: ioTDevice?.safe == true ? Colors.green : Colors.red
-                              )
+                        height: MediaQuery.of(context).size.width,
+                        //Google maps container
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: _center,
+                            zoom: 18.0
+                          ),
+                          markers: {
+                            Marker(
+                              markerId: MarkerId("1"),
+                              position: LatLng(-12.104026662911233, -76.962901676701),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
                             ),
-                          child: Center(child: Text(ioTDevice?.safe == true  ? "SAFE" : "DANGER", style: TextStyle(color: ioTDevice?.safe == true? Colors.green : Colors.red))),
-                        ),
-                      )
+                            Marker(
+                              markerId: MarkerId("2"),
+                              position: LatLng(-12.104510528382757, -76.96341800191995),
+                              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+                            ),
+                          }
+                        )
+                      ))
                     ],
                   ) :
                   Padding(

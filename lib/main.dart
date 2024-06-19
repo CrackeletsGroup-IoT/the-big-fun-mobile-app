@@ -1,7 +1,7 @@
 import 'package:big_fun_app/screens/attendees_list.dart';
 import 'package:big_fun_app/screens/view_my_events.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
 import 'screens/loguin_page.dart';
 
 void main() {
