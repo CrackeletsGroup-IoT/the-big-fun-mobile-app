@@ -15,15 +15,15 @@ class UuidServiceProvider{
 
   static Future<EventAttendee?> addIoTDeviceToEventAttendee(int eventAttendee_id, int ioTDevice_id) async{
     final rspta = await http.put(Uri.parse("https://the-big-fun.zeabur.app/api/v1/event-attendees/${eventAttendee_id}/iot-device/${ioTDevice_id}"));
-    if(rspta.statusCode == HttpStatus.ok){
+    if(rspta.statusCode == HttpStatus.created){
       final jsonResponse = json.decode(rspta.body);
-      return EventAttendee.fromJson(jsonResponse['eventAttendee']);
+      return EventAttendee.fromJson(jsonResponse);
     }
     return null;
   }
     //delete
-  static Future<EventAttendee?> deleteIoTDeviceToEventAttendee(int eventAttendee_id, int ioTDevice_id) async{
-    final rspta = await http.delete(Uri.parse("https://the-big-fun.zeabur.app/api/v1/event-attendees/${eventAttendee_id}/iot-device/${ioTDevice_id}"));
+  static Future<EventAttendee?> deleteIoTDeviceToEventAttendee(int eventAttendee_id) async{
+    final rspta = await http.delete(Uri.parse("https://the-big-fun.zeabur.app/api/v1/event-attendees/${eventAttendee_id}/iot-device/"));
     if(rspta.statusCode == HttpStatus.ok){
       final jsonResponse = json.decode(rspta.body);
       return EventAttendee.fromJson(jsonResponse);

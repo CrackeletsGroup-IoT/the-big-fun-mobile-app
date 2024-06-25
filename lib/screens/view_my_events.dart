@@ -31,9 +31,9 @@ class _ViewMyEventsState extends State<ViewMyEvents> {
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(24)),
-                            color: Color.fromARGB(255, 64, 64, 66)
+                            color: Color(0xff6363A3)
                           ),
-                          child: Icon(Icons.add, color: Color(0xff6363A3)),
+                          child: Icon(Icons.add, color: Colors.white),
                         ),
                       ),
                       Expanded(
